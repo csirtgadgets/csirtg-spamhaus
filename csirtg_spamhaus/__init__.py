@@ -6,14 +6,14 @@ from csirtg_spamhaus.constants import TIMEOUT, NAMESERVER, RE_FQDN, RE_IPV4, \
     IP_CODES, FQDN_CODES
 
 
-def _get(data, s):
+def _get(data, s, nameserver=NAMESERVER):
     data = '%s.%s.spamhaus.org' % (data, s)
 
     resolver = dns.resolver.Resolver()
     resolver.timeout = TIMEOUT
     resolver.lifetime = TIMEOUT
-    if NAMESERVER:
-        resolver.nameservers = [NAMESERVER]
+    if nameserver:
+        resolver.nameservers = [nameserver]
 
     resolver.search = []
 
@@ -35,23 +35,23 @@ def _get(data, s):
         return str(answers[0])
 
 
-def get_dbl(data):
-    return _get(data, 'dbl')
+def get_dbl(data, nameserver=NAMESERVER):
+    return _get(data, 'dbl', nameserver)
 
 
-def get_zen(data):
+def get_zen(data, nameserver=NAMESERVER):
     data = '.'.join(reversed(data.split('.')))
-    return _get(data, 'zen')
+    return _get(data, 'zen', nameserver)
 
 
-def get(i):
+def get(i, nameserver=NAMESERVER):
     if RE_IPV4.match(i):
-        rv = get_zen(i)
+        rv = get_zen(i, nameserver=nameserver)
         if rv:
             rv = IP_CODES[rv]
 
     elif RE_FQDN.match(i):
-        rv = get_dbl(i)
+        rv = get_dbl(i, nameserver=nameserver)
         if rv:
             rv = FQDN_CODES[rv]
 
