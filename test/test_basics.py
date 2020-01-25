@@ -8,7 +8,7 @@ INDICATORS = (
 
 def test_basics():
     for i in INDICATORS:
-        for p in get(i, '209.18.47.61'):
+        for p in get(i, '208.67.222.222'):
             assert p
 
 
@@ -18,4 +18,4 @@ def test_basics():
     except ValueError:
         pass
 
-    assert get('1.1.1.1', '209.18.47.61') is None
+    assert get('1.1.1.1', '208.67.222.222') is None
