@@ -1,1 +1,1 @@
-dnspython~=0.16
+dnspython~=1.16
