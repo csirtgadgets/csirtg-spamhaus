@@ -90,5 +90,13 @@ IP_CODES = {
         'tags': 'hijacked',
         'description': 'Spamhaus DROP/EDROP Data',
     },
+    '127.0.0.10': {
+        'tags': ['end-user', 'residential'],
+        'description': 'IP ranges which should not be delivering unauthenticated SMTP email.'
+    },
+    '127.0.0.11': {
+        'tags': ['end-user', 'residential'],
+        'description': 'IP ranges which should not be delivering unauthenticated SMTP email.'
+    }
 }
 

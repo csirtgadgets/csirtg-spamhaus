@@ -48,12 +48,12 @@ def get(i, nameserver=NAMESERVER):
     if RE_IPV4.match(i):
         rv = get_zen(i, nameserver=nameserver)
         if rv:
-            rv = IP_CODES[rv]
+            rv = IP_CODES.get(rv)
 
     elif RE_FQDN.match(i):
         rv = get_dbl(i, nameserver=nameserver)
         if rv:
-            rv = FQDN_CODES[rv]
+            rv = FQDN_CODES.get(rv)
 
     else:
         raise ValueError('indicator not supported')
